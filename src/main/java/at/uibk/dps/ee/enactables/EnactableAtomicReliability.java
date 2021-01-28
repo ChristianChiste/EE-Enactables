@@ -15,7 +15,7 @@ import net.sf.opendse.model.Task;
  */
 public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 
-	protected double faultRate;
+	protected final double faultRate;
 
 	protected EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Set<String> inputKeys, Task functionNode, 
 			EnactableAtomic enactableAtomic, double faultRate) {
@@ -23,13 +23,7 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 		this.faultRate=faultRate;
 	}
 
-	@Override
-	protected void atomicPlay() throws StopException {
-		if(faultDecision(faultRate))
-				throw new StopException(StoppingReason.ERROR);
-		enactableAtomic.atomicPlay();
-	}
-
+	
 	/**
 	 * Decides if we let the EnactableAtomic fail.
 	 * 
@@ -39,11 +33,19 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 	private boolean faultDecision(double faultRate){
 		return Math.random() <= faultRate;
 	}
-	
+
+
 
 	@Override
-	protected void myPause() {
-		// Nothing here
+	protected void prePlayDecoration ()throws StopException  {
+		if(faultDecision(faultRate))
+			throw new StopException(StoppingReason.ERROR);
 	}
 
+
+
+	@Override
+	protected void postPlayDecoration()throws StopException  {
+		// Nothing
+	}
 }
