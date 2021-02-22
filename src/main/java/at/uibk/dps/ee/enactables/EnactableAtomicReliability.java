@@ -4,7 +4,6 @@ import java.util.Set;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.core.exception.StopException;
-import at.uibk.dps.ee.core.exception.StopException.StoppingReason;
 import net.sf.opendse.model.Task;
 
 /**
@@ -17,13 +16,12 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 
 	protected final double faultRate;
 
-	protected EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Set<String> inputKeys, Task functionNode, 
+	protected EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Task functionNode, 
 			EnactableAtomic enactableAtomic, double faultRate) {
-		super(stateListeners, inputKeys, functionNode, enactableAtomic);
+		super(stateListeners, functionNode, enactableAtomic);
 		this.faultRate=faultRate;
 	}
 
-	
 	/**
 	 * Decides if we let the EnactableAtomic fail.
 	 * 
@@ -34,18 +32,14 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 		return Math.random() <= faultRate;
 	}
 
-
-
 	@Override
-	protected void prePlayDecoration ()throws StopException  {
+	protected void prePlayDecoration() throws StopException  {
 		if(faultDecision(faultRate))
-			throw new StopException(StoppingReason.ERROR);
+			throw new StopException("Fault occurred");
 	}
 
-
-
 	@Override
-	protected void postPlayDecoration()throws StopException  {
+	protected void postPlayDecoration() throws StopException  {
 		// Nothing
 	}
 }

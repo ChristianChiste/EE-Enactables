@@ -16,26 +16,15 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	protected final EnactableAtomic enactableAtomic;
 
-	protected EnactableAtomicDecorator(Set<EnactableStateListener> stateListeners, Set<String> inputKeys,
+	protected EnactableAtomicDecorator(Set<EnactableStateListener> stateListeners,
 			Task functionNode, EnactableAtomic enactableAtomic) {
-		super(stateListeners, inputKeys, functionNode);
+		super(stateListeners, functionNode);
 		this.enactableAtomic = enactableAtomic;
 	}
 
-	/*
-	 * 
-	 * If we create an extra class for the decoration, it would make sense that the
-	 * abstract class captures all things concerning the interaction with the
-	 * decorated object, while the concrete implementations only specify the
-	 * specific change in behavior.
-	 * 
-	 * 
-	 */
-
-	@Override
-	protected void atomicPlay() throws StopException {
+	public void play() throws StopException {
 		prePlayDecoration();
-		enactableAtomic.atomicPlay();
+		enactableAtomic.play();
 		postPlayDecoration();
 	}
 	
@@ -48,12 +37,12 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	 * Method where concrete instances describe what is to be done before the play
 	 * of the decorated object.
 	 */
-	protected abstract void prePlayDecoration() throws StopException ;
+	protected abstract void prePlayDecoration() throws StopException;
 	
 	/**
 	 * Method where concrete instances describe what is to be done before the play
 	 * of the decorated object.
 	 */
-	protected abstract void postPlayDecoration() throws StopException ;
+	protected abstract void postPlayDecoration() throws StopException;
 
 }
