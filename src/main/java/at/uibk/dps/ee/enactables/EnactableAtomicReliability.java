@@ -16,7 +16,7 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 
 	protected final double faultRate;
 
-	protected EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Task functionNode, 
+	public EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Task functionNode, 
 			EnactableAtomic enactableAtomic, double faultRate) {
 		super(stateListeners, functionNode, enactableAtomic);
 		this.faultRate=faultRate;

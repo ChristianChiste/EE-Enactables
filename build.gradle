@@ -29,6 +29,7 @@ dependencies {
   // dependencies to other parts of the Apollo Core EE
   implementation 'com.github.Apollo-Core:EE-Model:main-SNAPSHOT'
   implementation 'com.github.Apollo-Core:EE-Core:master-SNAPSHOT'
+  implementation 'com.github.Apollo-Core:EE-Guice:main-SNAPSHOT'
 
   // dependency to Opt4J
   implementation 'com.github.FedorSmirnov89:opt4j:-SNAPSHOT'

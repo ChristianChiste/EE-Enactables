@@ -10,6 +10,7 @@ import com.google.inject.Singleton;
 
 import at.uibk.dps.ee.core.enactable.Enactable;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
+import at.uibk.dps.ee.enactables.wrapperSkeletton.FactoryInterface;
 import at.uibk.dps.ee.model.properties.PropertyServiceFunction;
 import net.sf.opendse.model.Task;
 
@@ -21,7 +22,7 @@ import net.sf.opendse.model.Task;
  *
  */
 @Singleton
-public class EnactableFactory {
+public class EnactableFactory implements FactoryInterface{
 
   protected final Set<EnactableStateListener> stateListeners;
 
