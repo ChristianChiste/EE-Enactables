@@ -19,7 +19,7 @@ public class EnactableFactoryDecorator extends EnactableFactory {
 
 	@Inject
 	public EnactableFactoryDecorator(Set<EnactableStateListener> stateListeners, EnactableFactory wrappedFactory,
-			@Constant(namespace = EnactableFactoryDecorator.class, value = "faultRate") double faultRate) {
+			@Constant(namespace = EnactableFactoryDecorator.class, value = "failRate") double faultRate) {
 		super(stateListeners);
 		this.decoratedFactory = wrappedFactory;
 		this.faultRate = faultRate;
@@ -31,9 +31,4 @@ public class EnactableFactoryDecorator extends EnactableFactory {
 		return new EnactableAtomicReliability(stateListeners, task, rawEnactable, faultRate);
 	}
 
-	@Override
-	public void reproduceEnactable(Task offspring, EnactableAtomic parentEnactable) {
-		// TODO Auto-generated method stub
-
-	}
 }
