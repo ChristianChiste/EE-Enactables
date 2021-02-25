@@ -11,11 +11,11 @@ public class EnactableFactoryModule extends EeModule {
 
 	@Order(1)
 	@Info("If checked, the enactables fail with a certain probability")
-	protected boolean useReliabilityWrapper = false;
+	protected boolean useReliabilityWrapper = true;
 
 	@Order(2)
 	@Info("The fail rate of the enactables")
-	@Constant(namespace = EnactableFactoryDecorator.class, value = "failRate")
+	@Constant(namespace = EnactableFactoryDecorator.class, value = "faultRate")
 	protected double failRate = .5;
 
 	@Override

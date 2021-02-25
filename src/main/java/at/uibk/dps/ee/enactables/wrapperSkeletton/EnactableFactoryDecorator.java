@@ -19,7 +19,7 @@ public class EnactableFactoryDecorator extends EnactableFactory {
 
 	@Inject
 	public EnactableFactoryDecorator(Set<EnactableStateListener> stateListeners, EnactableFactory wrappedFactory,
-			@Constant(namespace = EnactableFactoryDecorator.class, value = "failRate") double faultRate) {
+			@Constant(namespace = EnactableFactoryDecorator.class, value = "faultRate") double faultRate) {
 		super(stateListeners);
 		this.decoratedFactory = wrappedFactory;
 		this.faultRate = faultRate;
