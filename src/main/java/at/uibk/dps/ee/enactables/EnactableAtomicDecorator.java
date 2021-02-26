@@ -6,6 +6,7 @@ import java.util.Set;
 import com.google.gson.JsonElement;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
+import at.uibk.dps.ee.core.enactable.Enactable.State;
 import at.uibk.dps.ee.core.exception.StopException;
 import net.sf.opendse.model.Task;
 
@@ -27,9 +28,11 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	public void play() throws StopException {
 		prePlayDecoration();
+		//just trying to get it to work please ignore this ugly code
 		for(Entry<String, JsonElement> entry:this.getInput().entrySet())
 			enactableAtomic.setInputValue(entry.getKey(), entry.getValue());
-		enactableAtomic.setState(State.LAUNCHABLE);
+		enactableAtomic.setState(State.SCHEDULABLE);
+		enactableAtomic.schedule(this.enactmentFunction);
 		enactableAtomic.play();
 		enactableAtomic.setState(State.FINISHED);
 		postPlayDecoration();
