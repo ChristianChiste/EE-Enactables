@@ -34,7 +34,9 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 		enactableAtomic.setState(State.SCHEDULABLE);
 		enactableAtomic.schedule(this.enactmentFunction);
 		enactableAtomic.play();
+		
 		enactableAtomic.setState(State.FINISHED);
+		this.setState(State.FINISHED);
 		postPlayDecoration();
 	}
 	
