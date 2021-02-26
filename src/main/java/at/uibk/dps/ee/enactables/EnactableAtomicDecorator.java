@@ -1,6 +1,9 @@
 package at.uibk.dps.ee.enactables;
 
+import java.util.Map.Entry;
 import java.util.Set;
+
+import com.google.gson.JsonElement;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.core.exception.StopException;
@@ -24,10 +27,8 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	public void play() throws StopException {
 		prePlayDecoration();
-		if(!enactableAtomic.isInputSet())
-			throw new StopException("Inner Enactable misses input");
-		else if(!this.isInputSet())
-			throw new StopException("Wrapper Enactable misses input");
+		for(Entry<String, JsonElement> entry:this.getInput().entrySet())
+			enactableAtomic.setInputValue(entry.getKey(), entry.getValue());
 		enactableAtomic.setState(State.LAUNCHABLE);
 		enactableAtomic.play();
 		enactableAtomic.setState(State.FINISHED);
