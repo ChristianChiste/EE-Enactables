@@ -3,6 +3,7 @@ package at.uibk.dps.ee.enactables;
 import java.util.Set;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
+import at.uibk.dps.ee.core.enactable.Enactable.State;
 import at.uibk.dps.ee.core.exception.StopException;
 import net.sf.opendse.model.Task;
 
@@ -24,7 +25,9 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	public void play() throws StopException {
 		prePlayDecoration();
+		enactableAtomic.setState(State.LAUNCHABLE);
 		enactableAtomic.play();
+		enactableAtomic.setState(State.FINISHED);
 		postPlayDecoration();
 	}
 	
