@@ -28,16 +28,7 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	public void play() throws StopException {
 		prePlayDecoration();
-		
-		//just trying to get it to work please ignore this ugly code
-		for(Entry<String, JsonElement> entry:this.getInput().entrySet())
-			enactableAtomic.setInputValue(entry.getKey(), entry.getValue());
-		enactableAtomic.setState(State.SCHEDULABLE);
-		enactableAtomic.schedule(this.enactmentFunction);
 		enactableAtomic.play();
-		this.jsonResult=enactableAtomic.getResult();
-		enactableAtomic.setState(State.FINISHED);
-		this.setState(State.FINISHED);
 		postPlayDecoration();
 	}
 	
@@ -47,15 +38,24 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	}
 
 	/**
-	 * Method where concrete instances describe what is to be done before the play
+	 * Method describes what is to be done before the play
 	 * of the decorated object.
 	 */
-	protected abstract void prePlayDecoration() throws StopException;
+	protected void prePlayDecoration() throws StopException {
+		for(Entry<String, JsonElement> entry:this.getInput().entrySet())
+			enactableAtomic.setInputValue(entry.getKey(), entry.getValue());
+		enactableAtomic.setState(State.SCHEDULABLE);
+		enactableAtomic.schedule(this.enactmentFunction);
+	}
 	
 	/**
-	 * Method where concrete instances describe what is to be done before the play
+	 * Method describes what is to be done before the play
 	 * of the decorated object.
 	 */
-	protected abstract void postPlayDecoration() throws StopException;
+	protected void postPlayDecoration() throws StopException {
+		this.jsonResult=enactableAtomic.getResult();
+		enactableAtomic.setState(State.FINISHED);
+		this.setState(State.FINISHED);
+	}
 
 }
