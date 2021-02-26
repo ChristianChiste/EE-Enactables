@@ -1,18 +1,15 @@
 package at.uibk.dps.ee.enactables.wrapperSkeletton;
 
-import java.util.Optional;
 import java.util.Set;
 
 import org.opt4j.core.start.Constant;
 
-import com.google.gson.JsonObject;
 import com.google.inject.Inject;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.enactables.EnactableAtomic;
 import at.uibk.dps.ee.enactables.EnactableAtomicReliability;
 import at.uibk.dps.ee.enactables.EnactableFactory;
-import at.uibk.dps.ee.model.properties.PropertyServiceFunction;
 import net.sf.opendse.model.Task;
 
 public class EnactableFactoryDecorator extends EnactableFactory {
