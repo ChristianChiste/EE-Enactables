@@ -53,15 +53,6 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	 * of the decorated object.
 	 */
 	protected void postPlayDecoration() throws StopException {
-		try {
-			this.jsonResult = enactableAtomic.getResult();
-			this.setState(State.FINISHED);
-		}
-		catch(IllegalStateException e) {
-			enactableAtomic.setState(State.WAITING);
-			this.setState(State.STOPPED);
-
-		}
+		this.setState(State.FINISHED);
 	}
-
 }
