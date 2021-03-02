@@ -31,7 +31,7 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 		enactableAtomic.play();
 		postPlayDecoration();
 	}
-	
+
 	@Override
 	protected void myPause() {
 		// Does nothing
@@ -47,15 +47,22 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 		enactableAtomic.setState(State.SCHEDULABLE);
 		enactableAtomic.schedule(this.enactmentFunction);
 	}
-	
+
 	/**
 	 * Method describes what is to be done before the play
 	 * of the decorated object.
 	 */
 	protected void postPlayDecoration() throws StopException {
-		this.jsonResult=enactableAtomic.getResult();
-		enactableAtomic.setState(State.FINISHED);
-		this.setState(State.FINISHED);
+		try {
+			this.jsonResult=enactableAtomic.getResult();
+			enactableAtomic.setState(State.FINISHED);
+			this.setState(State.FINISHED);
+		}
+		catch(IllegalStateException e) {
+			enactableAtomic.setState(State.WAITING);
+			this.setState(State.SCHEDULABLE);
+
+		}
 	}
 
 }
