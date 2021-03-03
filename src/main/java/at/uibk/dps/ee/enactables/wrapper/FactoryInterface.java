@@ -5,6 +5,12 @@ import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.enactables.EnactableAtomic;
 import net.sf.opendse.model.Task;
 
+/**
+ * Interface for the classes used for factories creating Enactables.
+ * 
+ * @author Christian Chisté
+ *
+ */
 public interface FactoryInterface {
 
 	/**

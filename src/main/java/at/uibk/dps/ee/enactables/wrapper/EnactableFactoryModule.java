@@ -7,6 +7,12 @@ import org.opt4j.core.start.Constant;
 import at.uibk.dps.ee.enactables.EnactableFactory;
 import at.uibk.dps.ee.guice.modules.EeModule;
 
+/**
+ * The module configuring the Enactable Factory.
+ * 
+ * @author Christian Chisté
+ *
+ */
 public class EnactableFactoryModule extends EeModule {
 
 	@Order(1)
