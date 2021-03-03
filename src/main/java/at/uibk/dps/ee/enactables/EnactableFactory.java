@@ -10,7 +10,7 @@ import com.google.inject.Singleton;
 
 import at.uibk.dps.ee.core.enactable.Enactable;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
-import at.uibk.dps.ee.enactables.wrapperSkeletton.FactoryInterface;
+import at.uibk.dps.ee.enactables.wrapper.FactoryInterface;
 import at.uibk.dps.ee.model.properties.PropertyServiceFunction;
 import net.sf.opendse.model.Task;
 
@@ -39,38 +39,17 @@ public class EnactableFactory implements FactoryInterface{
     this.stateListeners.addAll(stateListeners);
   }
 
-  /**
-   * Adds the given listener to the list of listeners provided to every
-   * constructed {@link Enactable}.
-   * 
-   * @param listener the listener to add
-   */
+  @Override
   public void addEnactableStateListener(final EnactableStateListener listener) {
     this.stateListeners.add(listener);
   }
 
-  /**
-   * Creates an enactable which can be used to perform the enactment modeled by
-   * the provided function node.
-   * 
-   * @param functionNode the provided function node
-   * @return an enactable which can be used to perform the enactment modeled by
-   *         the provided function node
-   */
+  @Override
   public EnactableAtomic createEnactable(final Task functionNode) {
     return new EnactableAtomic(stateListeners, functionNode);
   }
 
-  /**
-   * Creates the enactable of the given offspring task and adjusts its state so
-   * that it corresponds to the state of the parent enactable (if e.g., some
-   * inputs were already set before the reproduction).
-   * 
-   * @param offspring the offspring task
-   * @param parentEnactable the enactable of the parent
-   * @return the child enactable, adjusted to have the same state as the parent
-   *         enactable
-   */
+  @Override
   public void reproduceEnactable(final Task offspring, final EnactableAtomic parentEnactable) {
     final EnactableAtomic offspringEnactable = createEnactable(offspring);
     final JsonObject parentInput =

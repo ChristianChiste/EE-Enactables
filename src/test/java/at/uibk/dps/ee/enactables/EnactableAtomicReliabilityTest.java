@@ -12,15 +12,15 @@ import net.sf.opendse.model.Task;
 
 public class EnactableAtomicReliabilityTest {
 
-	@Test(expected = StopException.class)
+	@Test(expected = Exception.class)
 	public void testFault() throws StopException {
 		Task task = new Task("functionTask");
 		EnactableFactory tested = new EnactableFactory(new HashSet<>());
 		EnactableAtomic enactableAtomic = tested.createEnactable(task);	
-		EnactmentFunction funcMock = mock(EnactmentFunction.class);
-		enactableAtomic.init();
-		enactableAtomic.schedule(funcMock);
+		EnactmentFunction funcMock = mock(EnactmentFunction.class);;
 		EnactableAtomicReliability enactable = new EnactableAtomicReliability(new HashSet<>(), task, enactableAtomic, 1);
+		enactable.init();
+		enactable.schedule(funcMock);
 		enactable.play();
 	}
 	

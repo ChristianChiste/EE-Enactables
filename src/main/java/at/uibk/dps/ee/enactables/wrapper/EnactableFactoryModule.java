@@ -1,4 +1,4 @@
-package at.uibk.dps.ee.enactables.wrapperSkeletton;
+package at.uibk.dps.ee.enactables.wrapper;
 
 import org.opt4j.core.config.annotations.Info;
 import org.opt4j.core.config.annotations.Order;
@@ -15,13 +15,13 @@ public class EnactableFactoryModule extends EeModule {
 
 	@Order(2)
 	@Info("The fail rate of the enactables")
-	@Constant(namespace = EnactableFactoryDecorator.class, value = "failRate")
+	@Constant(namespace = EnactableFactoryReliability.class, value = "failRate")
 	protected double failRate = .5;
 
 	@Override
 	protected void config() {
 		if (useReliabilityWrapper) {
-			bind(FactoryInterface.class).to(EnactableFactoryDecorator.class);
+			bind(FactoryInterface.class).to(EnactableFactoryReliability.class);
 		} else {
 			bind(FactoryInterface.class).to(EnactableFactory.class);
 		}
