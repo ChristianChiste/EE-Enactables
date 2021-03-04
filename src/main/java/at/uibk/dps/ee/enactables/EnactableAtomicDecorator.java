@@ -4,8 +4,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
+import at.uibk.dps.ee.core.enactable.EnactmentFunction;
 import at.uibk.dps.ee.core.enactable.Enactable.State;
 import at.uibk.dps.ee.core.exception.StopException;
 import net.sf.opendse.model.Task;
@@ -52,6 +54,24 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	protected void postPlayDecoration() throws StopException {
 		this.jsonResult = enactableAtomic.getResult();
 		this.setState(State.FINISHED);
+	}
+	
+	// Instead of trying to mimic the behavior of an actual enactable, it would be better to delegate the method calls to the inner class:
+	// With that, you would only have the code specifying the behavior which in introduced through the decorater.
+	
+	@Override
+	public void schedule(EnactmentFunction function) {
+		enactableAtomic.schedule(function);
+	}
+	
+	@Override
+	public JsonObject getResult() {
+		return enactableAtomic.getResult();
+	}
+	
+	@Override
+	public State getState() {
+		return enactableAtomic.getState();
 	}
 
 	@Override

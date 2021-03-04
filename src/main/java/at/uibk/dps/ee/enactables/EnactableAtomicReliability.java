@@ -32,8 +32,11 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 		return Math.random() <= failRate;
 	}
 
+	
+	
 	@Override
 	protected void prePlayDecoration() throws StopException  {
+		// If you do the method delegation as described in the parent class, you probably won't require the calls to the parent methods here.
 		super.prePlayDecoration();
 
 	}
