@@ -33,8 +33,8 @@ public class ConditionEvaluation extends LocalFunctionAbstract {
 
   @Override
   public JsonObject processInput(final JsonObject input) throws StopException {
-    ConditionEvaluator evaluator = new ConditionEvaluator();
-    boolean result = evaluator.evaluate(conditions, input);
+    final ConditionEvaluator evaluator = new ConditionEvaluator();
+    final boolean result = evaluator.evaluate(conditions, input);
     final JsonObject jsonResult = new JsonObject();
     jsonResult.addProperty(ConstantsEEModel.JsonKeyIfDecision, result);
     return jsonResult;
