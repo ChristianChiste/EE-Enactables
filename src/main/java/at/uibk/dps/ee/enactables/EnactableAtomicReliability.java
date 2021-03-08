@@ -33,12 +33,6 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 	}
 
 	@Override
-	protected void prePlayDecoration() throws StopException  {
-		super.prePlayDecoration();
-
-	}
-
-	@Override
 	protected void postPlayDecoration() throws StopException  {
 		if(faultDecision(failRate))
 			throw new StopException("Fault occurred");

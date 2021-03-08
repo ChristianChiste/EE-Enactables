@@ -4,8 +4,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
+import at.uibk.dps.ee.core.enactable.EnactmentFunction;
 import at.uibk.dps.ee.core.enactable.Enactable.State;
 import at.uibk.dps.ee.core.exception.StopException;
 import net.sf.opendse.model.Task;
@@ -37,12 +39,6 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	 * of the decorated object.
 	 */
 	protected void prePlayDecoration() throws StopException {
-		if(!enactableAtomic.isInputSet()) {
-			for(Entry<String, JsonElement> entry:this.getInput().entrySet())
-				enactableAtomic.setInputValue(entry.getKey(), entry.getValue());
-		}
-		enactableAtomic.setState(State.SCHEDULABLE);
-		enactableAtomic.schedule(this.enactmentFunction);
 	}
 
 	/**
@@ -50,8 +46,34 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	 * of the decorated object.
 	 */
 	protected void postPlayDecoration() throws StopException {
-		this.jsonResult = enactableAtomic.getResult();
 		this.setState(State.FINISHED);
+	}
+	
+	@Override
+	public void setInputValue(final String key, final JsonElement value) {
+		//super.setInputValue(key, value);
+		enactableAtomic.setInputValue(key, value);
+	}
+	
+	@Override
+	public JsonObject getInput() {
+		return enactableAtomic.getInput();
+	}
+	
+	@Override
+	public void schedule(EnactmentFunction enactmentFunction) {
+		enactableAtomic.setState(State.SCHEDULABLE);
+		enactableAtomic.schedule(enactmentFunction);
+	}
+	
+	@Override
+	public State getState() {
+		return enactableAtomic.getState();
+	}
+	
+	@Override
+	public JsonObject getResult() {
+		return enactableAtomic.getResult();
 	}
 
 	@Override
