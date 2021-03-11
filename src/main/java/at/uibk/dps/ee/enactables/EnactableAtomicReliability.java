@@ -12,14 +12,14 @@ import net.sf.opendse.model.Task;
  * @author Christian Chisté
  *
  */
-public class EnactableAtomicReliability extends EnactableAtomicDecorator{
+public class EnactableAtomicReliability extends EnactableAtomicDecorator {
 
 	protected final double failRate;
 
-	public EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Task functionNode, 
+	public EnactableAtomicReliability(Set<EnactableStateListener> stateListeners, Task functionNode,
 			EnactableAtomic enactableAtomic, double failRate) {
 		super(stateListeners, functionNode, enactableAtomic);
-		this.failRate=failRate;
+		this.failRate = failRate;
 	}
 
 	/**
@@ -28,22 +28,18 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 	 * @param faultRate probability of fault
 	 * @return boolean which indicates decision to fail
 	 */
-	private boolean faultDecision(double failRate){
+	private boolean faultDecision(double failRate) {
 		return Math.random() <= failRate;
 	}
 
-	
-	
 	@Override
-	protected void prePlayDecoration() throws StopException  {
-		// If you do the method delegation as described in the parent class, you probably won't require the calls to the parent methods here.
-		super.prePlayDecoration();
-
+	protected void prePlayDecoration() {
+		// Nothing here
 	}
 
 	@Override
-	protected void postPlayDecoration() throws StopException  {
-		if(faultDecision(failRate))
+	protected void postPlayDecoration() throws StopException {
+		if (faultDecision(failRate))
 			throw new StopException("Fault occurred");
 		else {
 			super.postPlayDecoration();

@@ -22,8 +22,8 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	protected final EnactableAtomic enactableAtomic;
 
-	protected EnactableAtomicDecorator(Set<EnactableStateListener> stateListeners,
-			Task functionNode, EnactableAtomic enactableAtomic) {
+	protected EnactableAtomicDecorator(Set<EnactableStateListener> stateListeners, Task functionNode,
+			EnactableAtomic enactableAtomic) {
 		super(stateListeners, functionNode);
 		this.enactableAtomic = enactableAtomic;
 	}
@@ -35,43 +35,38 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	}
 
 	/**
-	 * Method describes what is to be done before the play
-	 * of the decorated object.
+	 * Method describes what is to be done before the play of the decorated object.
 	 */
-	protected void prePlayDecoration() throws StopException {
-		if(!enactableAtomic.isInputSet()) {
-			for(Entry<String, JsonElement> entry:this.getInput().entrySet())
-				enactableAtomic.setInputValue(entry.getKey(), entry.getValue());
-		}
-		enactableAtomic.setState(State.SCHEDULABLE);
-		enactableAtomic.schedule(this.enactmentFunction);
-	}
+	protected abstract void prePlayDecoration() throws StopException;
 
 	/**
-	 * Method describes what is to be done before the play
-	 * of the decorated object.
+	 * Method describes what is to be done before the play of the decorated object.
 	 */
 	protected void postPlayDecoration() throws StopException {
 		this.jsonResult = enactableAtomic.getResult();
 		this.setState(State.FINISHED);
 	}
-	
-	// Instead of trying to mimic the behavior of an actual enactable, it would be better to delegate the method calls to the inner class:
-	// With that, you would only have the code specifying the behavior which in introduced through the decorater.
-	
-	@Override
-	public void schedule(EnactmentFunction function) {
-		enactableAtomic.schedule(function);
-	}
-	
+
 	@Override
 	public JsonObject getResult() {
 		return enactableAtomic.getResult();
 	}
-	
+
 	@Override
 	public State getState() {
 		return enactableAtomic.getState();
+	}
+
+	@Override
+	public void setInputValue(final String key, final JsonElement value) {
+		super.setInputValue(key, value);
+		enactableAtomic.setInputValue(key, value);
+	}
+
+	@Override
+	public void schedule(EnactmentFunction enactmentFunction) {
+		enactableAtomic.setState(State.SCHEDULABLE);
+		enactableAtomic.schedule(enactmentFunction);
 	}
 
 	@Override
