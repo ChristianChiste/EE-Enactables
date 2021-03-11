@@ -31,6 +31,11 @@ public class EnactableAtomicReliability extends EnactableAtomicDecorator{
 	private boolean faultDecision(double failRate){
 		return Math.random() <= failRate;
 	}
+	
+	@Override
+	protected void prePlayDecoration() {
+		// Nothing here
+	}
 
 	@Override
 	protected void postPlayDecoration() throws StopException  {

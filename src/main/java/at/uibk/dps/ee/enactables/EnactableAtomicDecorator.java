@@ -38,42 +38,27 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 	 * Method describes what is to be done before the play
 	 * of the decorated object.
 	 */
-	protected void prePlayDecoration() throws StopException {
-	}
-
+	protected abstract void prePlayDecoration() throws StopException;
+	
 	/**
 	 * Method describes what is to be done before the play
 	 * of the decorated object.
 	 */
 	protected void postPlayDecoration() throws StopException {
+		this.jsonResult = enactableAtomic.getResult();
 		this.setState(State.FINISHED);
 	}
-	
+
 	@Override
 	public void setInputValue(final String key, final JsonElement value) {
-		//super.setInputValue(key, value);
+		super.setInputValue(key, value);
 		enactableAtomic.setInputValue(key, value);
 	}
-	
-	@Override
-	public JsonObject getInput() {
-		return enactableAtomic.getInput();
-	}
-	
+
 	@Override
 	public void schedule(EnactmentFunction enactmentFunction) {
 		enactableAtomic.setState(State.SCHEDULABLE);
 		enactableAtomic.schedule(enactmentFunction);
-	}
-	
-	@Override
-	public State getState() {
-		return enactableAtomic.getState();
-	}
-	
-	@Override
-	public JsonObject getResult() {
-		return enactableAtomic.getResult();
 	}
 
 	@Override
