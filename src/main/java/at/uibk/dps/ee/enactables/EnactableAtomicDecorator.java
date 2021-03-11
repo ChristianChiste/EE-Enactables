@@ -59,8 +59,15 @@ public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
 	@Override
 	public void setInputValue(final String key, final JsonElement value) {
-		super.setInputValue(key, value);
+		// Removed line:
+		//super.setInputValue(key, value); // is this necessary? Why not gelegate the get input to the original?
 		enactableAtomic.setInputValue(key, value);
+	}
+	
+	// Like this:
+	@Override
+	public JsonObject getInput() {
+		return enactableAtomic.getInput();
 	}
 
 	@Override
