@@ -21,19 +21,18 @@ import net.sf.opendse.model.Task;
  */
 public class EnactableFactoryReliability extends EnactableFactory {
 
-	protected final double failRate;
+  protected final double failRate;
 
-	@Inject
-	public EnactableFactoryReliability(Set<EnactableStateListener> stateListeners,
-			@Constant(namespace = EnactableFactoryReliability.class, value = "failRate") double failRate) {
-		super(stateListeners);
-		this.failRate = failRate;
-	}
+  @Inject
+  public EnactableFactoryReliability(Set<EnactableStateListener> stateListeners,
+      @Constant(namespace = EnactableFactoryReliability.class, value = "failRate") double failRate) {
+    super(stateListeners);
+    this.failRate = failRate;
+  }
 
-	@Override
-	public EnactableAtomic createEnactable(Task task) {
-		EnactableAtomic rawEnactable = super.createEnactable(task);
-		return new EnactableAtomicReliability(stateListeners, task, rawEnactable, failRate);
-	}
-
+  @Override
+  public EnactableAtomic createEnactable(Task task) {
+    EnactableAtomic rawEnactable = super.createEnactable(task);
+    return new EnactableAtomicReliability(stateListeners, task, rawEnactable, failRate);
+  }
 }

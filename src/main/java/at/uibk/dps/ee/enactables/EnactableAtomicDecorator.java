@@ -20,49 +20,52 @@ import net.sf.opendse.model.Task;
  */
 public abstract class EnactableAtomicDecorator extends EnactableAtomic {
 
-	protected final EnactableAtomic enactableAtomic;
+  protected final EnactableAtomic enactableAtomic;
 
-	protected EnactableAtomicDecorator(Set<EnactableStateListener> stateListeners,
-			Task functionNode, EnactableAtomic enactableAtomic) {
-		super(stateListeners, functionNode);
-		this.enactableAtomic = enactableAtomic;
-	}
+  protected EnactableAtomicDecorator(Set<EnactableStateListener> stateListeners,
+      Task functionNode, EnactableAtomic enactableAtomic) {
+    super(stateListeners, functionNode);
+    this.enactableAtomic = enactableAtomic;
+  }
 
-	public void play() throws StopException {
-		prePlayDecoration();
-		enactableAtomic.play();
-		postPlayDecoration();
-	}
+  public void play() throws StopException {
+    prePlayDecoration();
+    enactableAtomic.play();
+    postPlayDecoration();
+  }
 
-	/**
-	 * Method describes what is to be done before the play
-	 * of the decorated object.
-	 */
-	protected abstract void prePlayDecoration() throws StopException;
-	
-	/**
-	 * Method describes what is to be done before the play
-	 * of the decorated object.
-	 */
-	protected void postPlayDecoration() throws StopException {
-		this.jsonResult = enactableAtomic.getResult();
-		this.setState(State.FINISHED);
-	}
+  /**
+   * Method describes what is to be done before the play
+   * of the decorated object.
+   */
+  protected abstract void prePlayDecoration() throws StopException;
 
-	@Override
-	public void setInputValue(final String key, final JsonElement value) {
-		super.setInputValue(key, value);
-		enactableAtomic.setInputValue(key, value);
-	}
+  /**
+   * Method describes what is to be done before the play
+   * of the decorated object.
+   */
+  protected void postPlayDecoration() throws StopException {
+    this.setState(State.FINISHED);
+  }
 
-	@Override
-	public void schedule(EnactmentFunction enactmentFunction) {
-		enactableAtomic.setState(State.SCHEDULABLE);
-		enactableAtomic.schedule(enactmentFunction);
-	}
+  @Override
+  public void setInputValue(final String key, final JsonElement value) {
+    enactableAtomic.setInputValue(key, value);
+  }
 
-	@Override
-	protected void myPause() {
-		// Does nothing
-	}
+  @Override
+  public void schedule(EnactmentFunction enactmentFunction) {
+    enactableAtomic.setState(State.SCHEDULABLE);
+    enactableAtomic.schedule(enactmentFunction);
+    this.enactmentFunction = enactmentFunction;
+  }
+
+  public JsonObject getResult() {
+    return enactableAtomic.getResult();
+  }
+
+  @Override
+  protected void myPause() {
+    // Does nothing
+  }
 }
