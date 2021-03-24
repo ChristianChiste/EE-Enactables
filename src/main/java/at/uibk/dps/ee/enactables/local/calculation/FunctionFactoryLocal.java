@@ -10,14 +10,8 @@ import at.uibk.dps.ee.enactables.local.ConstantsLocal.LocalCalculations;
  * @author Fedor Smirnov
  *
  */
-public class FunctionFactoryLocal {
+public class FunctionFactoryLocal implements FunctionFactoryLocalInterface {
 
-  /**
-   * Returns the local function for the given enum.
-   * 
-   * @param localFunction the local function enum
-   * @return the local function for the enum
-   */
   public LocalFunctionAbstract getLocalFunction(final LocalCalculations localFunction) {
     switch (localFunction) {
       case Addition:

@@ -9,16 +9,8 @@ import net.sf.opendse.model.Resource;
  * 
  * @author Fedor Smirnov
  */
-public class FunctionFactoryServerless {
+public class FunctionFactoryServerless implements FunctionFactoryServerlessInterface{
 
-  /**
-   * Creates the {@link ServerlessFunction} which is modeled by the provided
-   * resource node.
-   * 
-   * @param resource the provided resource node
-   * @return the {@link ServerlessFunction} which is modeled by the provided
-   *         resource node
-   */
   public EnactmentFunction createServerlessFunction(final Resource resource) {
     return new ServerlessFunction(resource);
   }
