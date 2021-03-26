@@ -5,7 +5,6 @@ import org.opt4j.core.start.Constant;
 import com.google.inject.Inject;
 
 import at.uibk.dps.ee.core.enactable.EnactmentFunction;
-import at.uibk.dps.ee.enactables.local.LocalFunctionWrapper;
 import net.sf.opendse.model.Resource;
 
 public class FunctionFactoryServerlessWrapper implements FunctionFactoryServerlessInterface{

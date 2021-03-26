@@ -65,4 +65,8 @@ public class ServerlessFunction implements EnactmentFunction {
           "IOException when enacting the serverless function with the url:\n" + url, exc);
     }
   }
+  
+  public String getUrl() {
+    return url;
+  }
 }

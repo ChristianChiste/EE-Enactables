@@ -32,4 +32,12 @@ public class LocalFunctionWrapper extends LocalFunctionAbstract {
   private boolean faultDecision(double failRate){
     return Math.random() <= failRate;
   }
+  
+  public EnactmentFunction getEnactmentFunction() {
+    return function;
+  }
+  
+  public double getFailRate() {
+    return failRate;
+  }
 }

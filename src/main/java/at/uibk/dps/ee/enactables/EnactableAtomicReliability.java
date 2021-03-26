@@ -2,7 +2,6 @@ package at.uibk.dps.ee.enactables;
 
 import java.util.Set;
 
-import at.uibk.dps.ee.core.enactable.Enactable;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.core.exception.StopException;
 import at.uibk.dps.ee.enactables.local.Composite;

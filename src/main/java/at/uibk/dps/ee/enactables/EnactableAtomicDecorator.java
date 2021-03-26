@@ -1,6 +1,5 @@
 package at.uibk.dps.ee.enactables;
 
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gson.JsonElement;
@@ -8,7 +7,6 @@ import com.google.gson.JsonObject;
 
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.core.enactable.EnactmentFunction;
-import at.uibk.dps.ee.core.enactable.Enactable.State;
 import at.uibk.dps.ee.core.exception.StopException;
 import net.sf.opendse.model.Task;
 

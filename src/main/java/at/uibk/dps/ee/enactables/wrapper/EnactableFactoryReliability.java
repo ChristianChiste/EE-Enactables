@@ -6,7 +6,6 @@ import org.opt4j.core.start.Constant;
 
 import com.google.inject.Inject;
 
-import at.uibk.dps.ee.core.enactable.Enactable;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.enactables.EnactableAtomic;
 import at.uibk.dps.ee.enactables.EnactableAtomicReliability;

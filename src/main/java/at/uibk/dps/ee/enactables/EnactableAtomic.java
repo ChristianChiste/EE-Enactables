@@ -4,6 +4,7 @@ import java.util.Set;
 
 import at.uibk.dps.ee.core.enactable.Enactable;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
+import at.uibk.dps.ee.core.enactable.EnactmentFunction;
 import at.uibk.dps.ee.core.exception.StopException;
 import at.uibk.dps.ee.model.properties.PropertyServiceFunction;
 import net.sf.opendse.model.Task;
@@ -61,5 +62,9 @@ public class EnactableAtomic extends Enactable {
   @Override
   protected void myReset() {
     // do nothing
+  }
+  
+  public EnactmentFunction getEnactmentFunction() {
+    return enactmentFunction;
   }
 }
