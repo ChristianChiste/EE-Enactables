@@ -5,6 +5,12 @@ import com.google.gson.JsonObject;
 import at.uibk.dps.ee.core.enactable.EnactmentFunction;
 import at.uibk.dps.ee.core.exception.StopException;
 
+/**
+ * Class giving an EnactmentFunction the possibility to fail.
+ * 
+ * @author Christian Chisté
+ *
+ */
 public class LocalFunctionWrapper extends LocalFunctionAbstract {
 
   private EnactmentFunction function;
@@ -35,9 +41,5 @@ public class LocalFunctionWrapper extends LocalFunctionAbstract {
   
   public EnactmentFunction getEnactmentFunction() {
     return function;
-  }
-  
-  public double getFailRate() {
-    return failRate;
   }
 }

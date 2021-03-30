@@ -5,8 +5,8 @@ import at.uibk.dps.ee.core.exception.StopException;
 import net.sf.opendse.model.Resource;
 
 /**
- * The {@link ServerlessFunction} models the enactment of an atomic serverless
- * function.
+ * The {@link ServerlessFunctionWrapper} models the enactment of an atomic serverless
+ * function with a possibility to let the enactment fail.
  * 
  * @author Christian Chisté
  */
@@ -35,9 +35,5 @@ public class ServerlessFunctionWrapper extends ServerlessFunction {
    */
   private boolean faultDecision(double failRate){
     return Math.random() <= failRate;
-  }
-
-  public double getFailRate() {
-    return failRate;
   }
 }
