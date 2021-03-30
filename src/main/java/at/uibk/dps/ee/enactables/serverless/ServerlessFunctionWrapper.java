@@ -37,4 +37,7 @@ public class ServerlessFunctionWrapper extends ServerlessFunction {
     return Math.random() <= failRate;
   }
 
+  public double getFailRate() {
+    return failRate;
+  }
 }
