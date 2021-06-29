@@ -20,6 +20,7 @@ import at.uibk.dps.ee.core.exception.StopException;
 public class Composite implements EnactmentFunction{
 
   private List<EnactmentFunction> functions = new ArrayList<EnactmentFunction>();
+  private EnactmentFunction succeededFunction;
 
   @Override
   public JsonObject processInput(final JsonObject input) throws StopException {
@@ -27,13 +28,14 @@ public class Composite implements EnactmentFunction{
     List<FunctionExecutor> f = new ArrayList<FunctionExecutor>();
     for(EnactmentFunction function : functions)
       f.add(new FunctionExecutor(function, input));
-    JsonObject result = null;
+    FunctionResult result = null;
     try {
       result = executor.invokeAny(f);
+      succeededFunction = result.getFunction();
     } catch (Exception e) {
       throw new StopException(e.getMessage());
     }
-    return result;
+    return result.getOutput();
   }
 
   public void addFunction(EnactmentFunction function) {
@@ -42,5 +44,9 @@ public class Composite implements EnactmentFunction{
 
   public List<EnactmentFunction> getFunctions(){
     return functions;
+  }
+
+  public EnactmentFunction getSucceededFunction() {
+    return succeededFunction;
   }
 }

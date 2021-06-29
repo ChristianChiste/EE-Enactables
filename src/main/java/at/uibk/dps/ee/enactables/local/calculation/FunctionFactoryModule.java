@@ -20,17 +20,17 @@ public class FunctionFactoryModule extends EeModule {
   @Order(1)
   @Info("If checked, the enactables fail with a certain probability")
   protected static boolean useReliabilityWrapper = false;
-
-  @Order(2)
-  @Info("The fail rate of the local functions")
-  @Constant(namespace = FunctionFactoryLocalWrapper.class, value = "failRate")
-  protected static double failRateLocal = .5;
   
-  @Order(3)
+  @Order(2)
   @Info("The fail rate of the serverless functions")
   @Constant(namespace = FunctionFactoryServerlessWrapper.class, value = "failRate")
   protected static double failRateServerless = .5;
 
+  @Order(3)
+  @Info("The fail rate of the local functions")
+  @Constant(namespace = FunctionFactoryLocalWrapper.class, value = "failRate")
+  protected static double failRateLocal = 0;
+  
   @Override
   protected void config() {
     if (useReliabilityWrapper) {

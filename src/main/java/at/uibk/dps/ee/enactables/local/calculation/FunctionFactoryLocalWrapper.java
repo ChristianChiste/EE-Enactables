@@ -24,7 +24,7 @@ public class FunctionFactoryLocalWrapper implements FunctionFactoryLocalInterfac
   public FunctionFactoryLocalWrapper(@Constant(namespace = FunctionFactoryLocalWrapper.class, value = "failRate") double failRate) {
     this.failRate = failRate;
   }
-  
+
   public LocalFunctionAbstract getLocalFunction(final LocalCalculations localFunction) {
     switch (localFunction) {
       case Addition:

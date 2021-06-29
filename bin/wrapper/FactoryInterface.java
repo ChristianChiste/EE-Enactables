@@ -1,11 +1,8 @@
 package at.uibk.dps.ee.enactables.wrapper;
 
-import com.google.inject.ImplementedBy;
-
 import at.uibk.dps.ee.core.enactable.Enactable;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.enactables.EnactableAtomic;
-import at.uibk.dps.ee.enactables.EnactableFactory;
 import net.sf.opendse.model.Task;
 
 /**
@@ -14,7 +11,6 @@ import net.sf.opendse.model.Task;
  * @author Christian Chisté
  *
  */
-@ImplementedBy(EnactableFactory.class)
 public interface FactoryInterface {
 
   /**

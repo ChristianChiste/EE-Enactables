@@ -12,7 +12,7 @@ import at.uibk.dps.ee.core.enactable.EnactmentFunction;
  * @author Christian Chisté
  *
  */
-public class FunctionExecutor implements Callable<JsonObject>{
+public class FunctionExecutor implements Callable<FunctionResult>{
 
   private final EnactmentFunction function;
   private final JsonObject input;
@@ -23,7 +23,9 @@ public class FunctionExecutor implements Callable<JsonObject>{
   }
 
   @Override
-  public JsonObject call() throws Exception {
-    return function.processInput(input);
+  public FunctionResult call() throws Exception {
+    JsonObject output = function.processInput(input);
+    FunctionResult result = new FunctionResult(function, output);
+    return result;
   }
 }
